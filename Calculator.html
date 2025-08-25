@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <style>
+        .container {
+            text-align: center;
+            /* background-color: aqua; */
+            margin-top: 100px;
+        }
+
+        p {
+            text-align: bottom;
+            color: white;
+            font-style: italic;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        h1 {
+            color: white;
+            font-size: 50px;
+            font-family: 'Courier New', Courier, monospace;
+            text-shadow: 2px 2px 4px rgba(249, 44, 7, 0.5);
+        }
+
+        input[type="text"] {
+            background: #111;
+            padding: 15px;
+            font-size: 28px;
+            text-align: right;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #00ffc3;
+            word-wrap: break-word;
+            min-height: 50px;
+            box-shadow: inset 0 0 10px #00ffc3;
+        }
+
+        button {
+            padding: 16px;
+            margin: 5px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            background-color: #222;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
+            box-sizing: border-box;
+            height: 50px;
+            width: 75px;
+        }
+
+        button:hover {
+            background-color: #333;
+            box-shadow: 0 0 10px #f86808;
+        }
+
+        .calculator {
+            border: 2px solid rgb(237, 237, 242);
+            display: inline-block;
+            /* margin: 2px; */
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(244, 242, 242, 0.5);
+        }
+
+        #equal {
+            background-color: #00ffc3;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #equal:hover {
+            background-color: #12ffe0;
+        }
+
+        .unique {
+            font-weight: bold;
+            color: black;
+            background-color: #ff4081;
+            /* background : transparent; */
+        }
+
+        .unique:hover {
+            background-color: #ff5f94;
+            /* background : transparent; */
+        }
+
+        body {
+            background: linear-gradient(45deg, #0a0a0a, #3a4455);
+            background-attachment: fixed;
+
+        }
+
+        #toggle {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        #toggleTheme {
+            position: fixed;
+            top: 20px;
+            left: 10px;
+            right: 16px;
+            padding: 7px;
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .history {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        body.light {
+            background: #f9f9f9;
+            color: #222;
+        }
+
+        body.light h1 {
+            color: #222;
+            text-shadow: 2px 2px 4px rgba(249, 44, 7, 0.5);
+        }
+
+        body.light .calculator {
+            background: #fff;
+            color: #222;
+        }
+
+        body.light .history {
+            background: #fff;
+            color: #222;
+        }
+
+        body.light button {
+            background: #e0e0e0;
+            color: black;
+        }
+
+        body.light button:hover {
+            background: #d5d5d5;
+        }
+
+        body.light #screen {
+            background: #f0f0f0;
+            color: #150202;
+        }
+
+        body.light #toggleTheme {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body class="light">
+    <div class="container">
+        <acronym title="DARK/LIGHT"><button id="toggleTheme">☀️/🌙</button></acronym>
+        <h1>Calculator</h1>
+        <!-- <p>Made By Suryansh Gupta.</p> -->
+        <div class="calculator">
+            <input type="text" id="screen" placeholder="0" readonly>
+            <table>
+                <tr>
+                    <td><button class="unique">AC</button></td>
+                    <td><button class="unique">(</button></td>
+                    <td><button class="unique">)</button></td>
+                    <td><button class="unique" id="toggle">Deg</button></td>
+                </tr>
+                <tr>
+                    <td><button class="unique">sin</button></td>
+                    <td><button class="unique">cos</button></td>
+                    <td><button class="unique">tan</button></td>
+                    <td><button class="unique">log</button></td>
+                </tr>
+                <tr>
+                    <td><button class="unique">π</button></td>
+                    <td><button class="unique">e</button></td>
+                    <td><button class="unique">M+</button></td>
+                    <td><button class="unique">M-</button></td>
+                </tr>
+                <tr>
+                    <td><button class="unique">x!</button></td>
+                    <td><button class="unique">√</button></td>
+                    <td><button class="unique">^</button></td>
+                    <td><button class="unique">/</button></td>
+                </tr>
+                <tr>
+                    <td><button>7</button></td>
+                    <td><button>8</button></td>
+                    <td><button>9</button></td>
+                    <td><button class="unique">X</button></td>
+                </tr>
+                <tr>
+                    <td><button>4</button></td>
+                    <td><button>5</button></td>
+                    <td><button>6</button></td>
+                    <td><button class="unique">-</button></td>
+                </tr>
+                <tr>
+                    <td><button>1</button></td>
+                    <td><button>2</button></td>
+                    <td><button>3</button></td>
+                    <td><button class="unique">+</button></td>
+                </tr>
+                <tr>
+                    <td><button>%</button></td>
+                    <td><button>0</button></td>
+                    <td><button>.</button></td>
+                    <td><button id="equal">=</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <aside class="history">
+        <hr>
+        <h2>Instructions</h2>
+        <ul>
+            <li>Use the buttons to perform calculations.</li>
+            <li>Click 'AC' to clear the screen.</li>
+            <li>Toggle between degrees and radians using the 'Deg' button.</li>
+            <li>Factorial is calculated using 'x!'.</li>
+        </ul>
+        <p>Made by Suryansh Gupta.</p>
+    </aside>
+    <script>
+        alert('Welcome to Scientific Calculator');
+        let screen = document.getElementById('screen');
+        let buttons = document.querySelectorAll('button');
+        let screenValue = '';
+        let isDegrees = true;
+        let memory = 0;
+        let his = document.getElementsByClassName('history')[0];
+        function addToHistory(expression, result) {
+            const entry = document.createElement('div');
+            entry.textContent = `${expression} = ${result}`;
+            entry.style.padding = '4px 0';
+            his.prepend(entry); // adds newest on top
+        }
+        function evaluateExpression(expr) {
+            try {
+                return eval(expr);
+            } catch {
+                return "Error";
+            }
+        }
+        for (item of buttons) {
+            item.addEventListener('click', (e) => {
+                let buttonText = e.target.innerText;
+                console.log(buttonText);
+                if (buttonText == 'X') {
+                    buttonText = '*';
+                    screenValue += buttonText;
+                    screen.value = screenValue;
+                }
+
+                else if (buttonText == 'AC') {
+                    screenValue = '';
+                    screen.value = screenValue;
+                }
+                else if (buttonText == '=') {
+                    let result = evaluateExpression(screenValue);
+                    screen.value = result;
+                    addToHistory(screenValue, result);
+                    screenValue = '';
+                }
+                else if (buttonText === 'sin') {
+                    let val = eval(screenValue)
+                    let result = Math.sin(convertAngle(val)).toFixed(4);
+                    screen.value = result;
+                    addToHistory(`sin(${val}${isDegrees ? '°' : ' rad'})`, result);
+                    screenValue = '';
+                }
+                else if (buttonText === 'cos') {
+                    let val = eval(screenValue);
+                    screen.value = Math.cos(convertAngle(val)).toFixed(4);
+                    addToHistory(`cos(${val}${isDegrees ? '°' : ' rad'})`, screen.value);
+                    screenValue = '';
+                    // console.log(`cos(${val}${isDegrees ? '°' : ' rad'}`)
+                }
+                else if (buttonText === 'tan') {
+                    let val = eval(screenValue);
+                    screen.value = Math.tan(convertAngle(val)).toFixed(4);
+                    addToHistory(`tan(${val}${isDegrees ? '°' : ' rad'})`, screen.value);
+                    screenValue = '';
+                }
+                else if (buttonText === 'log') {
+                    let val = eval(screenValue);
+                    screen.value = Math.log(val).toFixed(4);
+                    addToHistory(`log(${screenValue})`, screen.value);
+                    screenValue = '';
+                }
+                else if (buttonText === '√') {
+                    let val = eval(screenValue);
+                    screen.value = Math.sqrt(val).toFixed(4);
+                    addToHistory(`√(${screenValue})`, screen.value);
+                    screenValue = '';
+                }
+                else if (buttonText === '^') {
+                    screenValue += '**';
+                    screen.value = screenValue;
+                }
+                else if (buttonText === 'π') {
+                    screenValue += Math.PI.toFixed(4);
+                    screen.value = screenValue;
+                }
+                else if (buttonText === 'e') {
+                    screenValue += Math.E.toFixed(4);
+                    screen.value = screenValue;
+                }
+                else if (buttonText === '☀️/🌙') {
+
+                    document.body.classList.toggle('light');
+                }
+                else if (buttonText === 'Deg' || buttonText === 'Rad') {
+                    isDegrees = !isDegrees;
+                    e.target.innerText = isDegrees ? 'Deg' : 'Rad';
+                }
+                else if (buttonText === 'x!') {
+                    let num = eval(screenValue);
+                    if (isNaN(num) || num < 0) {
+                        screen.value = "Error";
+                    } else {
+                        let factorial = 1;
+                        for (let i = 1; i <= num; i++) {
+                            factorial *= i;
+                        }
+                        console.log(factorial);
+                        screenValue = factorial;
+                        screen.value = screenValue;
+                        addToHistory(`${num}!`, screen.value);
+                    }
+                }
+                else {
+                    screenValue += buttonText;
+                    screen.value = screenValue;
+                }
+            })
+        }
+        document.addEventListener('keydown', (e) => {
+            if ((e.key >= '0' && e.key <= '9') || ['+', '-', '*', '/', '.', '(', ')'].includes(e.key)) {
+                screenValue += e.key;
+                screen.value = screenValue;
+            } else if (e.key === 'Enter') {
+                let result = evaluateExpression(screenValue);
+                screen.value = result;
+                addToHistory(screenValue, result);
+                screenValue = '';
+            } else if (e.key === 'Backspace') {
+                screenValue = screenValue.slice(0, -1);
+                screen.value = screenValue;
+            }
+        });
+        function convertAngle(val) {
+            return isDegrees ? val * (Math.PI / 180) : val;
+        }
+    </script>
+</body>
+
+</html>
